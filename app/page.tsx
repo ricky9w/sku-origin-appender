@@ -35,12 +35,12 @@ const PDFProcessor = () => {
       pages.forEach((page, index) => {
         const { width } = page.getSize();
         const text = "Made In China";
-        const fontSize = 8;
+        const fontSize = 6;
         const textWidth = helveticaFont.widthOfTextAtSize(text, fontSize);
 
         page.drawText(text, {
           x: (width - textWidth) / 2,
-          y: fontSize * 1,
+          y: fontSize * 1.5,
           size: fontSize,
           font: helveticaFont
         });
