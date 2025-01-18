@@ -17,9 +17,12 @@ const PDFProcessor = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [progress, setProgress] = useState(0);
   const [processing, setProcessing] = useState(false);
+  const [currentFile, setCurrentFile] = useState<string>("");
+  const [fileQueue, setFileQueue] = useState<File[]>([]);
 
   const processPDF = async (file: File) => {
     try {
+      setCurrentFile(file.name);
       setProcessing(true);
       setProgress(20);
 
@@ -68,11 +71,26 @@ const PDFProcessor = () => {
       }, 1000);
     } catch (error) {
       console.error('Error processing PDF:', error);
-      alert('处理PDF时发生错误, 请重试');
-    } finally {
-      setProcessing(false);
-      setProgress(0);
+      alert(`处理PDF文件 ${file.name} 时发生错误, 请重试`);
     }
+  };
+
+  const processFiles = async (files: File[]) => {
+    setProcessing(true);
+    setFileQueue(files);
+    
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (file.type === 'application/pdf') {
+        await processPDF(file);
+      } else {
+        alert(`文件 ${file.name} 不是有效的PDF文件。`);
+      }
+    }
+    
+    setProcessing(false);
+    setFileQueue([]);
+    setCurrentFile("");
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -89,20 +107,16 @@ const PDFProcessor = () => {
     e.preventDefault();
     setIsDragging(false);
 
-    const file = e.dataTransfer.files[0];
-    if (file && file.type === 'application/pdf') {
-      await processPDF(file);
-    } else {
-      alert('Please upload a valid PDF file.');
+    const files = Array.from(e.dataTransfer.files);
+    if (files.length > 0) {
+      await processFiles(files);
     }
   };
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file && file.type === 'application/pdf') {
-      await processPDF(file);
-    } else {
-      alert('Please upload a valid PDF file.');
+    const files = e.target.files ? Array.from(e.target.files) : [];
+    if (files.length > 0) {
+      await processFiles(files);
     }
   };
 
@@ -116,7 +130,7 @@ const PDFProcessor = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-        <div
+          <div
             className={`border-2 border-dashed rounded-lg p-8 text-center ${
               isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
             }`}
@@ -127,7 +141,7 @@ const PDFProcessor = () => {
             <div className="flex flex-col items-center justify-center">
               <Upload className="w-12 h-12 text-gray-400 mb-4" />
               <p className="text-gray-600 mb-2">
-                拖拽 PDF 文件到这里, 或者
+                拖拽一个或多个PDF文件到这里, 或者
               </p>
               <Button
                 variant="outline"
@@ -141,6 +155,7 @@ const PDFProcessor = () => {
                 id="file-upload"
                 className="hidden"
                 accept=".pdf"
+                multiple
                 onChange={handleFileSelect}
               />
             </div>
@@ -150,7 +165,7 @@ const PDFProcessor = () => {
             <div className="mt-4">
               <Progress value={progress} className="w-full" />
               <p className="text-sm text-gray-500 mt-2 text-center">
-                正在处理...
+                正在处理: {currentFile} ({fileQueue.length} 个文件待处理)
               </p>
             </div>
           )}
