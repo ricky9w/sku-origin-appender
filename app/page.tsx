@@ -141,7 +141,7 @@ const PDFProcessor = () => {
             <div className="flex flex-col items-center justify-center">
               <Upload className="w-12 h-12 text-gray-400 mb-4" />
               <p className="text-gray-600 mb-2">
-                拖拽一个或多个PDF文件到这里, 或者
+                拖拽一个或多个 PDF 文件到这里, 或者
               </p>
               <Button
                 variant="outline"
