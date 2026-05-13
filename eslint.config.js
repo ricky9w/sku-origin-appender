@@ -12,6 +12,9 @@ const gitignorePath = path.resolve(import.meta.dirname, '.gitignore');
 
 export default defineConfig(
 	includeIgnoreFile(gitignorePath),
+	{
+		ignores: ['worker-configuration.d.ts', 'src/lib/components/ui/**']
+	},
 	js.configs.recommended,
 	ts.configs.recommended,
 	svelte.configs.recommended,
@@ -35,10 +38,5 @@ export default defineConfig(
 				svelteConfig
 			}
 		}
-	},
-	{
-		// Override or add rule settings here, such as:
-		// 'svelte/button-has-type': 'error'
-		rules: {}
 	}
 );

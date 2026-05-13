@@ -32,16 +32,16 @@ Open <http://localhost:5173>.
 
 ## Scripts
 
-| Command          | Purpose                                                        |
-| ---------------- | -------------------------------------------------------------- |
-| `bun run dev`    | Start the Vite dev server                                      |
-| `bun run check`  | Regenerate Cloudflare types and run `svelte-check`             |
-| `bun run test`   | Run the Vitest suite once                                      |
-| `bun run lint`   | Prettier + ESLint                                              |
-| `bun run format` | Prettier write                                                 |
-| `bun run build`  | Build the worker bundle into `.svelte-kit/cloudflare/`         |
-| `bun run preview` | Serve the built worker locally via `wrangler dev`             |
-| `bun run deploy` | Build and `wrangler deploy` to Cloudflare                      |
+| Command           | Purpose                                                |
+| ----------------- | ------------------------------------------------------ |
+| `bun run dev`     | Start the Vite dev server                              |
+| `bun run check`   | Regenerate Cloudflare types and run `svelte-check`     |
+| `bun run test`    | Run the Vitest suite once                              |
+| `bun run lint`    | Prettier + ESLint                                      |
+| `bun run format`  | Prettier write                                         |
+| `bun run build`   | Build the worker bundle into `.svelte-kit/cloudflare/` |
+| `bun run preview` | Serve the built worker locally via `wrangler dev`      |
+| `bun run deploy`  | Build and `wrangler deploy` to Cloudflare              |
 
 ## Deployment
 
