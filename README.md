@@ -1,63 +1,42 @@
-# SKU Origin Appender
+# sv
 
-Simple web-based tool for appending country of origin information to Amazon 50mm x 30mm FNSKU labels.
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-## Features
+## Creating a project
 
-- 💫 Drag and drop support
-- 📱 Responsive design for all devices
-- 🔒 Client-side processing for privacy
-- ⚡️ Real-time progress indication
+If you're seeing this, you've probably already done this step. Congrats!
 
-## Getting Started
-
-1. Clone the repository
-
-```
-git clone https://github.com/ricky9w/sku-origin-appender.git
-cd sku-origin-appender
+```sh
+# create a new project
+npx sv create my-app
 ```
 
-2. Install dependenciees
+To recreate this project with the same configuration:
 
-```
-npm install
-# or
-yarn install
-# or
-pnpm install
+```sh
+# recreate this project
+bun x sv@0.15.3 create --template minimal --types ts --add tailwindcss="plugins:none" sveltekit-adapter="adapter:cloudflare+cfTarget:workers" vitest="usages:unit" prettier eslint --install bun .
 ```
 
-3. Start the development server
+## Developing
 
-```
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```sh
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+## Building
 
-## Deployment
+To create a production version of your app:
 
-You can deploy this application to Vercel with one click:
+```sh
+npm run build
+```
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fricky9w%2Fsku-origin-appender)
+You can preview the production build with `npm run preview`.
 
-## Privacy
-
-All files are processed locally in your browser. No data is sent to the server.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Issues and Pull Requests are welcome!
-
-## Support
-
-If you encounter any problems or have suggestions, please open an issue in the GitHub repository.
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
